@@ -1,36 +1,31 @@
 #include <stdio.h>
-int fibo (int a)
-{
-    if(a==0 || a==1)
-    {
-        return a;
+
+int isFibonacci(int n) {
+    if (n <= 1) {
+        return 1; // 0 and 1 are part of the Fibonacci series
     }
-    else
-    {
-        return fibo (a-2) + fibo (a-1);
+
+    int a = 0, b = 1, c;
+
+    while (b < n) {
+        c = a + b;
+        a = b;
+        b = c;
     }
+
+    return (b == n);
 }
 
-void main()
-{
-    int n; int a=0; int count = 0 ; int i;
-    printf("Enter a number");
-    scanf("%d",&n);
-    for (i=0; i<=n;i++)
-    {
-        if (fibo(a)==n)
-        {
-            count++;
-            break; 
-        }
-        a++;
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (isFibonacci(num)) {
+        printf("%d is part of the Fibonacci series.\n", num);
+    } else {
+        printf("%d is not part of the Fibonacci series.\n", num);
     }
-    if(count!=0)
-    {
-        printf("Fibonacci number");
-    }
-    else
-    {
-        printf("Not a Fibonacci number");
-    }
+
+    return 0;
 }
