@@ -36,7 +36,7 @@ void main(){
 
 
      /*the following loop works like this :
-     itbtakes the first element and compares with rest of the elements of the loop expect itself 
+     it takes the first element and compares with rest of the elements of the loop expect itself 
      if no comparision comes out true for the first element then second element is taken to compare 
      now it will starting comparing from 3 element */
      
