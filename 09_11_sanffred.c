@@ -1,3 +1,12 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+// Array Implementation of Stack 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
