@@ -1,3 +1,13 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+
+// Write a function that compares two arrays and returns 1 if they are identical and 0 otherwise
+
+
 #include <stdio.h>
 
 int compareArrays(int arr1[], int arr2[], int size) {
