@@ -1,3 +1,11 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+// Write a C program to generate Pascal Triangle using array
+
 #include <stdio.h>
 int main()
 {
