@@ -1,3 +1,14 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+
+// Write a program in C to count the total number of duplicate elements in an array
+
+
+
 #include <stdio.h>
 int main() {
     int size, i, j, count = 0;
