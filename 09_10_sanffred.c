@@ -1,3 +1,13 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+
+// Write a program in C to print all unique elements in an array
+
+
 #include <stdio.h>
 int main() {
     int size;
