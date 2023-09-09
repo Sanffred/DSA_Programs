@@ -1,3 +1,11 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+// PROGRAM TO CHECK IF A GIVEN NUMBER IS A PART OF FIBONACCI NUMBER SERIES
+
 #include <stdio.h>
 
 int isFibonacci(int n) {
