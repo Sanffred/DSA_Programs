@@ -1,42 +1,60 @@
-#include <stdio.h>
+#include <Stdio.h>
+
+struct student{   //creating a structure
+    int Rollno;
+    char name[100];
+    float P;
+};
+
 
 void main(){
 
-    int num,size;
+    int N;
+    printf("\n Enter the number of students: \t "); //taking user input on the number of students
+    scanf("%d",&N);
 
-    //taking user input for the size of the array 
-    
-    printf("\n Enter the size of array:- \t");
-    scanf("%d",&size);
+    struct student s[N]; //declaring a structre variable
 
+    printf("\n\n -----Enter the student details:-----");
+    for(int i=0;i<N;i++){
+        printf("\n Enter the roll no of %d th student : \t ",i+1);
+        scanf("%d",&s[i].Rollno);
 
+        printf("\n Enter the name of the %d th student : \t",i+1);
+        scanf("%s",s[i].name);
 
-    //creating an array with the SIZE = size 
+        printf("\n Enter the percentage of the %d th student : \t",i+1);
+        scanf("%f",&s[i].P);
+    }
 
-    int array[size];
-
-
-
-    //to enter the values into the array
-
-    printf("-----Entering elemnts-----\n");
-    for(int a=0;a<size;a++){
-        printf("\n Eneter element %d \t",a+1);
-        scanf("%d",&array[a]);
+    printf("\n\n -----Displaying the list of students-----");
+    for(int i=0;i<N;i++){
+        printf("\n Roll number  = %d",s[i].Rollno);
+        printf("\n   Name         = %s",s[i].name);
+        printf("\n   Percentage   = %.2f",s[i].P);
     }
 
 
+    //in this nested loop we check of the condition if the first array rollno is less than the second one 
+    //if true then we interchange their positions using the swap technique
+    // the conditions in both the for loops make sure that there is comaprision between the first two roll numbers 
+    for(int i=0;i<N-1;i++){
+        for(int j=0;j<N-i-1;j++){
+            if(s[j].Rollno<s[j+1].Rollno){
+                
+                struct student temps;
+                temps=s[j];
+                s[j]=s[j+1];
+                s[j+1]=temps;
 
-     /*the following loop works like this :
-     itbtakes the first element and compares with rest of the elements of the loop expect itself 
-     if no comparision comes out true for the first element then second element is taken to compare 
-     now it will starting comparing from 3 element */
-    int largest=0;
-    for(int i=0;i<size;i++){
-        if(largest<array[i]){
-            largest=array[i];
+            }
         }
     }
-    
-    printf("\n The largest out of the elements is %d",largest);
+
+    printf("\n\n -----Displaying the list of students in descending order of Roll no-----");
+    for(int i=0;i<N;i++){
+        printf("\n Roll number  = %d",s[i].Rollno);
+        printf("\n   Name         = %s",s[i].name);
+        printf("\n   Percentage   = %.2f",s[i].P);
+    }
 }
