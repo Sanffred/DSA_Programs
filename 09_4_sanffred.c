@@ -1,3 +1,12 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
+
+// DISPLAYING RECORDS OF  5 STUDENTS USING ARRAY OF STRUCTURE IN ASCENDING ORDER OF ROLL LIST
+
+
 #include <Stdio.h>
 
 struct student{   //creating a structure
