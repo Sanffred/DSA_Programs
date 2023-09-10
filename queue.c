@@ -1,151 +1,146 @@
+/* 
+    SANFFRED JOJU
+    ROLL NUMBER - 09
+    BATCH - A
+*/
 
-#include<stdio.h>
-#include<stdlib.h>
+// Array implementation of queue
 
-/* defining 6 as size */
-#define size 6
+// bug : when the menue is displayed and when pressed 1 to enqueue after entering the element to enqueue the program somehow terminates
 
-/* Queue initialization */
-int queue[size];
-int f = -1;
-int r = -1;
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int SIZE;
 
-/* function prototypes */
-void enqueue(int);
+void enqueue(); 
+
 void dequeue();
-void isEmpty();
-void show();
 
-/* main function */
-int main()
-{
-	// declaration of variables //
-	int ch, n;
-	/* while loop */
-	while(1)
-	{
-		// Choice Display //
-		printf("\n----Queue Menu----");
-		printf("\n1. Enqueue");
-		printf("\n2. Dequeue");
-		printf("\n3. Check Empty");
-		printf("\n4. Display Queue");
-		printf("\n5. Exit");
-		printf("\nEnter your choice : ");
-		scanf("%d", &ch);
-		
-		// switch case // 
-		switch(ch)
-		{
-			case 1:
-				printf("\nEnter a Integer value : ");
-				scanf("%d", &n);
-				enqueue(n); break;
-			case 2:
-				dequeue();break;
-			case 3:
-				isEmpty();break;
-			case 4:
-				show();break;
-			case 5:
-				exit(0);break;
-			default:
-				printf("\nInvalid Choice! Try Again!");
-		}
-		// switch case ends here //
+void display();
 
-	}
-	/* while loop ends here */
-	return 0;
+
+void main(){
+
+    int rear=-1;
+    int front=-1;
+
+    int option;
+
+    printf("\n Enter the size of the array : ");
+    scanf("%d",&SIZE);
+
+    int A1[SIZE];
+
+    while(4)
+    {
+        printf("\n -----------Queue Operation---------- \n\n");
+
+        printf("\t -----Menue-----\n");
+        printf("\n 1. ENQUEUE Operation");
+        printf("\n 2. DEQUEUE Operation");
+        printf("\n 3. DISPLAY ");
+        printf("\n 4. EXIT \n");
+
+        printf("\n Enter the desired operation using their SR number :");
+        scanf("%d",&option);
+
+        
+
+        switch (option){
+            case 1 :
+                // printf("\n Enter the element to be added : \t");
+                // scanf("%d",&queue_elements);
+                enqueue(A1,&rear,&front);
+                break;
+
+            case 2 :
+                dequeue(A1,&rear,&front);
+                break;
+
+            case 3 :
+                display(A1,&rear,&front);
+                break;
+
+            case 4 : 
+                exit(4);
+                break;
+        }
+    } 
 }
-/* main function ends here */
 
-/* enqueue() : adds element to queue*/
-void enqueue(int n)
-{
-	if(f == -1 && r == -1)
-	{
-		f++;
-		queue[++r] = n;
-	} 
-	else
-	{
-		if()
-		{
-			printf("\nqueue is full!");
-		}	
-		else
-		{
-			queue[++r] = n;
-		}
-	}
-}
-/* enqueue() function ends here */
+void enqueue(int array[SIZE],int *pointer_rear,int *pointer_front){
 
-/* dequeue() : deletes element from front end of queue*/
-void dequeue()
-{
-	if(f == -1 && r == -1)
-	{
-		printf("\nQueue is Empty!");
-	}
-	else if(f == r)
-	{
-		f = -1;
-		r = -1;
-	}
-	else
-	{
-		f++;
-	}
-}
-/* dequeue ends here */
+    int element;
 
-/* isEmpty() : check is the queue is empty or not */
-void isEmpty()
-{
-	if(f == -1 && r == -1)
-	{
-		printf("\nQueue is Empty!");
-	}
-	else
-	{
-		printf("\nQueue is not Empty!");
-	}
-}
-/* isEmpty func ends here */
+    if (*pointer_rear==SIZE-1){
 
-/* show() : displays queue with front and rear pointers */
-void show()
-{
-	int i;
-	if(f == -1 && r == -1)
-	{
-		printf("\nQueue is Empty!");
-	} 
-	else
-	{
-		printf("\n------------");
-		for(i = f; i <= r; i++)
-		{
-			if(i == f && i == r)
-			{
-				printf("\n%d <- front and rear", queue[i]);
-			}
-			else if(i == f)
-			{
-				printf("\n%d <- front", queue[i]);
-			}
-			else if(i == r)
-			{
-				printf("\n%d <- rear", queue[i]);
-			}
-			else
-			{
-				printf("\n%d", queue[i]);
-			}
-		}
-		printf("\n------------");
-	}
+        printf("\n Queue is full");
+    }
+    if(*pointer_front==-1 && *pointer_rear==-1){
+
+        *pointer_front++;
+        *pointer_rear++;
+
+        printf("\n Enter the desired number to be added to the queue :");
+        scanf("%d",&element);
+
+        array[*pointer_rear]=element;
+
+        printf("\n Element Added to queue sucessfully ");
+
+        *pointer_rear++;
+    }
+    else{
+
+        printf("\n Enter the desired number to be added to the queue :");
+        scanf("%d",&element);
+
+        array[*pointer_rear]=element;
+
+        printf("\n Element Added to queue sucessfully ");
+
+        *pointer_rear++;
+    }
 }
-/* show function ends here */
+
+void dequeue(int array[SIZE],int *pointer_rear,int *pointer_front){
+
+    if (*pointer_front==-1 && *pointer_rear==-1){
+
+        printf("\n Queue is empty ");
+    }
+    else if (*pointer_front==SIZE-1 && *pointer_rear==SIZE-1){
+
+        *pointer_front++;
+        printf("\n Last element in the array has been deleted");
+
+        *pointer_front=*pointer_rear=-1;
+
+    }
+    else{
+
+        *pointer_front++;
+        printf("\n Element deleted sucessfully ");
+    }
+}
+
+void display(int array[SIZE],int *pointer_rear,int *pointer_front){
+
+    if (*pointer_front==-1 && *pointer_rear==-1){
+
+        printf("\n Queue is empty");
+    }
+    else{
+
+        for( int i=*pointer_front ; i<*pointer_rear ; i++ ){
+
+        printf("\n\t %d \n",array[i]);
+
+        }
+    }
+    
+    
+    
+}
+
