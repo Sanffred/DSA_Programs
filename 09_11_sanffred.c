@@ -6,7 +6,6 @@
 
 // Array Implementation of Stack 
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
