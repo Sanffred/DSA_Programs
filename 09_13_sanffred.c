@@ -1,119 +1,126 @@
-/* 
-    SANFFRED JOJU
-    ROLL NUMBER - 09
-    BATCH - A
-*/
+/*
+Name: Sanffred Joju
+Roll No: 09
+Branch: IT
+Batch: A*/
 
-// Array implimentation of circular Queue
-
-/* BUGs: 1. The enqueue functions can accept unlimited number of elements even if the size of an array is constant 
-         2. The display function too isint working properly as it always shows that queue is empty */
-
+/*Array Implementation of Circular  Queue*/
 
 #include <stdio.h>
 #include <stdlib.h>
+//#include <conio.h>
+#define size 5
 
-#define SIZE 5
-int A1[SIZE];
+int queue[size];
 int front,rear;
 
-/* FUNTION PROTOTYPE */
-
 void init();
-void enqueue();
+void enqueue(int);
 void dequeue();
 void display();
 
-void main(){
-    
-    init();
-    int option,element;
-
-    while(5){
-        printf("\n -----------Queue Operation---------- \n\n");
-
-        printf("\t -----Menue-----\n");
-        printf("\n 1. ENQUEUE Operation");
-        printf("\n 2. DEQUEUE Operation");
-        printf("\n 3. DISPLAY ");
-        printf("\n 4. EXIT \n");
-
-        printf("\n Enter the desired operation using their SR number :");
-        scanf("%d",&option);
-
-        switch(option){
-
-            case 1: 
-                printf("\n Enter the element to be added :");
-                scanf("%d",&element);
-                enqueue(element);
-                break;
-            
-            case 2: 
-                dequeue();
-                break;
-
-            case 3:
-                display();
-                break;
-
-            case 4:
-                exit(5);
-                break;
-        }
-    }
+void init()
+{
+	front=-1;
+	rear=-1;
 }
 
-void init(){
-    front=-1;
-    rear=-1;
+void enqueue(int x)
+{
+
+	if (front==0 && rear==size-1 || front==rear+1)  // CQ is full
+			printf("\n Queue Overflow");
+	else
+  {
+    if (front==-1 && rear==-1)        //CQ is empty
+    {
+	    front=0;rear=0;
+    }
+		else
+	  {
+			rear=(rear+1)%size;
+		}
+
+			queue[rear]=x;
+		//	 printf("\n ==>Front = %d and Rear=%d",front,rear);
+	}
+	
 }
 
-void enqueue(int x){
+void dequeue()
+{
+    if(rear==-1 && front==-1)
+				printf("\n Circular Queue Underflow/Empty");
+    else if(rear==front)
+	    {
+				printf("\n %d deleted",queue[front]);
+				rear=-1;
+				front=-1;
+	    }
+	 	else
+	    {
+	      printf("\n %d deleted",queue[front]);
+	      front=(front+1)%size;
+	    }
 
-    if((rear==SIZE-1 && front==0) || rear==front-1){
-
-        printf("\n Queue is Full");
-
-    }
-    if(front==-1 && rear==-1){
-        rear++;
-        front++;
-
-        A1[rear]=x;
-        printf("\n Element added sucessfully");
-    }
-    else{
-
-        rear=(rear++)%SIZE;
-        A1[rear]=x;
-        printf("\n Element added sucessfully");
-    }
 }
 
-void dequeue(){
+void display()
+{
+  int i;
+  if(rear==-1 && front==-1)
+		printf("\n Queue Underflow");
+  else
+	{ 
+		i=front;
 
-    if(rear==-1 && front==-1){
-        printf("\n Queue is empty");
-    }
-    else if(front==rear){
-        printf("\n Queue is empty");
-        front=rear=-1;
-    }
-    else{
-        front=(front++)%SIZE;
-        printf("\n Elemnet deleted sucessfully");
-    }
+	 	while(i!=rear)
+		{
+	    printf("\n %d ",queue[i]);
+			i=(i+1)%size;
+		}
+		printf("\n %d",queue[i]);
+	}
 }
 
-void display(){
 
-    if((rear==-1 && front==-1) || front==rear){
-        printf("\n Queue is empty");
-    }
-    else{
-        for(int i=front;i<rear;i++){
-            printf("\n\t %d",A1[i]);
-        }   
-    }
+
+void main()
+{
+int ch;
+int x;
+init();
+
+while(1)
+{
+//clrscr();
+printf("\nCircular Queue Operation");
+printf("\n1. Enqueue element ");
+printf("\n2. Dequeue element ");
+printf("\n3. Display the Queue elements");
+printf("\n4. Exit");
+printf("\n Enter your choice:");
+scanf("%d",&ch);
+
+switch(ch)
+{
+case 1: printf("\n Enter the element to be enqueued:");
+	scanf("%d",&x);
+	enqueue(x);
+	break;
+
+case 2: dequeue();
+	//		getch();
+			break;
+
+case 3: display();
+		//	getch();
+			break;
+case 4: printf("\n Exiting the program");
+		exit(1);
+default: printf("\n Wrong Choice");
+			break;
+
+}
+}
 }
