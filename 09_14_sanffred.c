@@ -1,172 +1,153 @@
-/* 
-    SANFFRED JOJU
-    ROLL NUMBER - 09
-    BATCH - A
+/*
+Name = Sanffred Joju
+Roll No. = 09
+pid = 14
+SE-IT (sem 3)
+2023-24
+Batch - A
 */
 
-// Deque implementation in C
+/*Array implementation of double-ended Queue*/
 
-#include <stdio.h>
-
-#define MAX 10
-
-void addFront(int *, int, int *, int *);
-void addRear(int *, int, int *, int *);
-int delFront(int *, int *, int *);
-int delRear(int *, int *, int *);
-void display(int *);
-int count(int *);
-
-int main() {
-  int arr[MAX];
-  int front, rear, i, n;
-
-  front = rear = -1;
-  for (i = 0; i < MAX; i++)
-    arr[i] = 0;
-
-  addRear(arr, 5, &front, &rear);
-  addFront(arr, 12, &front, &rear);
-  addRear(arr, 11, &front, &rear);
-  addFront(arr, 5, &front, &rear);
-  addRear(arr, 6, &front, &rear);
-  addFront(arr, 8, &front, &rear);
-
-  printf("\nElements in a deque: ");
-  display(arr);
-
-  i = delFront(arr, &front, &rear);
-  printf("\nremoved item: %d", i);
-
-  printf("\nElements in a deque after deletion: ");
-  display(arr);
-
-  addRear(arr, 16, &front, &rear);
-  addRear(arr, 7, &front, &rear);
-
-  printf("\nElements in a deque after addition: ");
-  display(arr);
-
-  i = delRear(arr, &front, &rear);
-  printf("\nremoved item: %d", i);
-
-  printf("\nElements in a deque after deletion: ");
-  display(arr);
-
-  n = count(arr);
-  printf("\nTotal number of elements in deque: %d", n);
+#include<stdio.h>
+int f=-1, r=-1;
+int n=5, x, ch;
+int arr[5];
+void makeEmpty(int arr[])
+{
+    //making Queue empty
+    f=r=-1;
 }
-
-void addFront(int *arr, int item, int *pfront, int *prear) {
-  int i, k, c;
-
-  if (*pfront == 0 && *prear == MAX - 1) {
-    printf("\nDeque is full.\n");
-    return;
-  }
-
-  if (*pfront == -1) {
-    *pfront = *prear = 0;
-    arr[*pfront] = item;
-    return;
-  }
-
-  if (*prear != MAX - 1) {
-    c = count(arr);
-    k = *prear + 1;
-    for (i = 1; i <= c; i++) {
-      arr[k] = arr[k - 1];
-      k--;
+void enQueueRear(int x, int arr[])
+{
+    if((r==n-1)&&(f==0)||(f==r+1))
+    {
+        //Queue Overflow
+        printf("Queue is full");
+        return;
     }
-    arr[k] = item;
-    *pfront = k;
-    (*prear)++;
-  } else {
-    (*pfront)--;
-    arr[*pfront] = item;
-  }
-}
-
-void addRear(int *arr, int item, int *pfront, int *prear) {
-  int i, k;
-
-  if (*pfront == 0 && *prear == MAX - 1) {
-    printf("\nDeque is full.\n");
-    return;
-  }
-
-  if (*pfront == -1) {
-    *prear = *pfront = 0;
-    arr[*prear] = item;
-    return;
-  }
-
-  if (*prear == MAX - 1) {
-    k = *pfront - 1;
-    for (i = *pfront - 1; i < *prear; i++) {
-      k = i;
-      if (k == MAX - 1)
-        arr[k] = 0;
-      else
-        arr[k] = arr[i + 1];
+    if(f==-1)
+    {
+        //entering first value
+        f++;
     }
-    (*prear)--;
-    (*pfront)--;
-  }
-  (*prear)++;
-  arr[*prear] = item;
+    r = (r+1)%n;
+    arr[r]= x;
 }
-
-int delFront(int *arr, int *pfront, int *prear) {
-  int item;
-
-  if (*pfront == -1) {
-    printf("\nDeque is empty.\n");
-    return 0;
-  }
-
-  item = arr[*pfront];
-  arr[*pfront] = 0;
-
-  if (*pfront == *prear)
-    *pfront = *prear = -1;
-  else
-    (*pfront)++;
-
-  return item;
+void enQueueFront(int x, int arr[])
+{
+    if((r==n-1)&&(f==0)||(f==r+1))
+    {
+        //Queue Overflow
+        printf("Queue is full");
+        return;
+    }
+    if(f==-1)
+    {
+        //entering first value
+        enQueueRear(x, arr);
+        return;
+    }
+    if(f==0){
+    	//entering element in end as cannot enter before
+    	f=n-1;
+    	arr[f]=x;
+    	return;
+    }
+    f--;
+    arr[f]=x;
 }
-
-int delRear(int *arr, int *pfront, int *prear) {
-  int item;
-
-  if (*pfront == -1) {
-    printf("\nDeque is empty.\n");
-    return 0;
-  }
-
-  item = arr[*prear];
-  arr[*prear] = 0;
-  (*prear)--;
-  if (*prear == -1)
-    *pfront = -1;
-  return item;
+void deQueueFront(int arr[])
+{
+    if(f==-1)
+    {
+        //Queue Underflow
+        printf("Queue is empty");
+        return;
+    }
+    if(f==r)
+    {
+        //single element to pop
+        f=-1;r=-1;
+        return;
+    }
+    f=(f+1)%n;
 }
-
-void display(int *arr) {
-  int i;
-
-  printf("\n front:  ");
-  for (i = 0; i < MAX; i++)
-    printf("  %d", arr[i]);
-  printf("  :rear");
+void deQueueRear(int arr[])
+{
+    if(f==-1)
+    {
+        //Queue Underflow
+        printf("Queue is empty");
+        return;
+    }
+    if(f==r)
+    {
+        //single element to pop
+        f=-1;r=-1;
+        return;
+    }
+    if(r==0){
+    	r=n-1;
+    }
+    else{
+    	r--;
+    }
 }
+void display(int arr[])
+{
+    if(f==-1)
+    {
+        //no element to print
+        printf("Queue is empty");
+        return;
+    }
+	for(int i=f; i!=r; i=(i+1)%n){
+		printf("%d\n", arr[i]);
+	}
+	printf("%d", arr[r]);
+}
+void main()
+{
 
-int count(int *arr) {
-  int c = 0, i;
+    do{
+        //description of menu bar//
+        printf("\n\n\n\n-----These are the menu panel-----");
+        printf("\n1. Enter element in Que from front end");
+        printf("\n2. Enter element in Que from rear end");
+        printf("\n3. Delete from Que from front end");
+        printf("\n4. Delete from Que from rear end");
+        printf("\n5. Display ");
+        printf("\n6. Exit");
+        printf("\nenter the option no.: ");
+        scanf("%d", &ch);
 
-  for (i = 0; i < MAX; i++) {
-    if (arr[i] != 0)
-      c++;
-  }
-  return c;
+       // swtich on the entere choice
+
+        switch(ch)
+        {
+           /*Calling the functions case wise*/
+            case 1: 
+            printf("enter the number you want to push: ");
+            scanf("%d", &x);
+            enQueueFront(x, arr);
+                break;
+            case 2: 
+            printf("enter the number you want to push: ");
+            scanf("%d", &x);
+            enQueueRear(x, arr);
+                break;
+            case 3: deQueueFront(arr);
+                break;
+            case 4: deQueueRear(arr);
+                break;
+            case 5: display(arr);
+                break;
+            case 6: printf("\nExiting the program");
+                break;
+            default:
+                printf("incorrect choice");
+        } 
+    }while (ch!=6);
+   
 }
