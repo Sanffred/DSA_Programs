@@ -6,139 +6,98 @@
 
 // Array implementation of queue
 
-// bug : when the menue is displayed and when pressed 1 to enqueue after entering the element to enqueue the program somehow terminates
+#include<stdio.h>
+#include<stdlib.h>
 
-#include <stdio.h>
-#include <stdlib.h>
- 
-int SIZE;
+#define size 5
 
-void enqueue(); 
+int queue[size];
+int front,rear;
 
+void init();
+void enqueue(int);
 void dequeue();
-
 void display();
 
+void init()
+{
+front=0;
+rear=-1;
+}
 
-void main(){
-
-    int rear=-1;
-    int front=-1;
-
-    int option;
-
-    printf("\n Enter the size of the array : ");
-    scanf("%d",&SIZE);
-
-    int A1[SIZE];
-
-    while(4)
-    {
-        printf("\n -----------Queue Operation---------- \n\n");
-
-        printf("\t -----Menue-----\n");
-        printf("\n 1. ENQUEUE Operation");
-        printf("\n 2. DEQUEUE Operation");
-        printf("\n 3. DISPLAY ");
-        printf("\n 4. EXIT \n");
-
-        printf("\n Enter the desired operation using their SR number :");
-        scanf("%d",&option);
-
-        
-
-        switch (option){
-            case 1 :
-                // printf("\n Enter the element to be added : \t");
-                // scanf("%d",&queue_elements);
-                enqueue(A1,&rear,&front);
-                break;
-
-            case 2 :
-                dequeue(A1,&rear,&front);
-                break;
-
-            case 3 :
-                display(A1,&rear,&front);
-                break;
-
-            case 4 : 
-                exit(4);
-                break;
+void enqueue(int x)
+{
+    if(rear==size-1){
+    printf("Queue overflow");
+    }
+    else
+        {
+            rear =rear+1;
+            queue[rear]=x;
         }
-    } 
 }
 
-void enqueue(int array[SIZE],int *pointer_rear,int *pointer_front){
-
-    int element;
-
-    if (*pointer_rear==SIZE-1){
-
-        printf("\n Queue is full");
-    }
-    if(*pointer_front==-1 && *pointer_rear==-1){
-
-        *pointer_front++;
-        *pointer_rear++;
-
-        printf("\n Enter the desired number to be added to the queue :");
-        scanf("%d",&element);
-
-        array[*pointer_rear]=element;
-
-        printf("\n Element Added to queue sucessfully ");
-
-        *pointer_rear++;
-    }
-    else{
-
-        printf("\n Enter the desired number to be added to the queue :");
-        scanf("%d",&element);
-
-        array[*pointer_rear]=element;
-
-        printf("\n Element Added to queue sucessfully ");
-
-        *pointer_rear++;
-    }
-}
-
-void dequeue(int array[SIZE],int *pointer_rear,int *pointer_front){
-
-    if (*pointer_front==-1 && *pointer_rear==-1){
-
-        printf("\n Queue is empty ");
-    }
-    else if (*pointer_front==SIZE-1 && *pointer_rear==SIZE-1){
-
-        *pointer_front++;
-        printf("\n Last element in the array has been deleted");
-
-        *pointer_front=*pointer_rear=-1;
-
-    }
-    else{
-
-        *pointer_front++;
-        printf("\n Element deleted sucessfully ");
-    }
-}
-
-void display(int array[SIZE],int *pointer_rear,int *pointer_front){
-
-    if (*pointer_front==-1 && *pointer_rear==-1){
-
+void dequeue()
+{
+    if(rear<front)
         printf("\n Queue is empty");
-    }
-    else{
-
-        for( int i=*pointer_front ; i<*pointer_rear ; i++ ){
-
-        printf("\n\t %d \n",array[i]);
-
+        else
+        {
+            printf("\n %d is deleted",queue[front++]);
         }
-    }
+
+}
+
+void display()
+{
+    int i;
+    if(rear<front)
+        printf("\n Queue underflow");
+    else
+        for(i=front;i<=rear;i++)   
+        {
+            printf("\n %d",queue[i]);
+        } 
+}
+
+void main()
+{
+int ch;
+int x;
+init();
+
+while(1)
+{
+printf("\n....Queue Operation....");
+printf("\n1. Enqueue element");
+printf("\n2. Dequeue element");
+printf("\n3. Displaythe Queue elements");
+printf("\n4. Exit");
+printf("\n Enter your choice:");
+scanf("%d",&ch);
+
+switch(ch)
+{
+case 1: printf("\n Enter the element to be enqueued:");
+        scanf("%d",&x);
+        enqueue(x);
+        break;
+ 
+ case 2: dequeue();
+         break ;
+         
+ case 3: display();
+         break;
+         
+ case 4: exit(1);
+ default: printf("\n wrong choice"); 
+         break;       
+            
+        
+}
+}
+
+}
     
     
     
